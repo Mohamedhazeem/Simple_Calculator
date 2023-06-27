@@ -65,9 +65,11 @@ document.addEventListener("keydown", function (e) {
   if (e.key == "Backspace") {
     removeAtLast();
   }
-  if (isAnyNumber && e.key == "Enter") {
+  if (isAnyNumber && (e.key == "Enter" || e.key == "=")) {
     e.preventDefault();
     calculateResult();
+  } else if (e.key == "r") {
+    location.reload();
   }
 });
 
@@ -81,8 +83,6 @@ function removeAtLast() {
   } else {
     isAnyNumber = false;
   }
-  console.log(screenvalue);
-  console.log(screenvalue.length);
 }
 
 historyButton.addEventListener("click", showHistory);
