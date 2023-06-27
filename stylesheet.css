@@ -1,0 +1,116 @@
+:root {
+  --backspace-color: rgb(253, 82, 82);
+  --math-color: rgb(81, 214, 255);
+  --clear-color: rgb(122, 247, 109);
+  --result-color: rgb(255, 160, 35);
+  --history-page-color: rgb(222, 255, 180);
+}
+body,
+html {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: beige;
+  background-color: rgb(23, 24, 37);
+}
+
+.container {
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+h1 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+a {
+  text-decoration: none;
+  margin-left: 30px;
+}
+.historybutton {
+  width: 30px;
+  height: 30px;
+  float: right;
+  margin-right: 15px;
+}
+input {
+  width: 70vw;
+  height: 3rem;
+  border-radius: 15px;
+  outline: none;
+  margin-bottom: 10px;
+  text-align: right;
+  font-size: 50px;
+}
+table {
+  margin: auto;
+}
+button {
+  border: none;
+  background-color: white;
+  width: 20vw;
+  height: 10vh;
+  padding: 0.5rem 0;
+  margin: 0.5vmax;
+  font-size: 2rem;
+  border-radius: 0.5rem;
+  -moz-transition: all ease 0.5s;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  -o-transition: all ease 0.5s;
+}
+button:active {
+  transform: scale(0.95);
+}
+#backspace-symbol {
+  background-color: var(--backspace-color);
+}
+.symbol {
+  font-size: 3vmax;
+  font-weight: 600;
+}
+.math-symbol {
+  background-color: var(--math-color);
+}
+.clear-symbol {
+  background-color: var(--clear-color);
+}
+.result-symbol {
+  background-color: var(--result-color);
+}
+.history-background {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(245, 245, 245, 0.13);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+  z-index: 1;
+}
+.history {
+  background-color: var(--history-page-color);
+  width: 70vw;
+  height: 70vh;
+  z-index: 20;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.history-element {
+  color: black;
+  margin: 20px;
+  font-size: 50px;
+  font-weight: 800;
+}
+.hide {
+  display: none;
+}
