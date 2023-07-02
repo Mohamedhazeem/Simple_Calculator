@@ -7,19 +7,19 @@ const historyPage = document.getElementById("history-page");
 let screenvalue = "",
   lastScreenValue = "";
 let maxHistoryItems = 6;
-let isAnyNumber = false;
+let isAnyNumber = false,isSign = true;
 
 for (let i = 0; i < buttons.length; i++) {
   buttons[i].addEventListener("click", function (e) {
     let buttontext = e.target.innerText;
     if (buttontext == "C") {
       if (e.key != "Enter") {
-        console.log("Enter");
         clear();
       }
-    } else if (isAnyNumber && buttontext == "X") {
+    } else if (isAnyNumber && buttontext == "X" && !isSign) {
       screenvalue += "*";
       screen.value = screenvalue;
+      isSign = true;
     } else if (isAnyNumber && buttontext == "=") {
       calculateResult();
     } else if (buttontext == "00") {
@@ -29,8 +29,9 @@ for (let i = 0; i < buttons.length; i++) {
       screenvalue += buttontext;
       screen.value = screenvalue;
       isAnyNumber = true;
+      isSign = false;
     } else if (
-      isAnyNumber &&
+      isAnyNumber && !isSign &&
       (buttontext == "/" ||
         buttontext == "-" ||
         buttontext == "+" ||
@@ -38,6 +39,7 @@ for (let i = 0; i < buttons.length; i++) {
     ) {
       screenvalue += buttontext;
       screen.value = screenvalue;
+      isSign = true;
     }
   });
 }
@@ -46,10 +48,11 @@ document.addEventListener("keydown", function (e) {
     isAnyNumber = true;
     screenvalue += e.key;
     screen.value = screenvalue;
+    isSign = false;
   }
   if (
-    isAnyNumber &&
-    (e == "*" ||
+    isAnyNumber && !isSign &&
+    (e.key == "*" ||
       e.key == "-" ||
       e.key == "/" ||
       e.key == "-" ||
@@ -58,6 +61,7 @@ document.addEventListener("keydown", function (e) {
   ) {
     screenvalue += e.key;
     screen.value = screenvalue;
+    isSign = true;
   }
   if (e == "Escape") {
     clear();
@@ -78,10 +82,16 @@ backspace.addEventListener("click", function () {
 });
 function removeAtLast() {
   if (screenvalue.length > 0) {
+    let lastSign = screenvalue.substring(screenvalue.length,1);
+    if(lastSign && lastSign == '*' || "-" || "+" || "/" || "%") {
+      isSign = false;
+    }
     screenvalue = screenvalue.substring(0, screenvalue.length - 1);
     screen.value = screenvalue;
-  } else {
+  } 
+  if(screenvalue.length == 0) {
     isAnyNumber = false;
+    isSign = true;
   }
 }
 
@@ -96,10 +106,12 @@ function isNumber(number) {
 }
 function clear() {
   isAnyNumber = false;
+  isSign = true;
   screenvalue = "";
   screen.value = screenvalue;
 }
 function calculateResult() {
+  isSign = false;
   let answer = eval(screenvalue);
   if (answer === undefined) return;
   screen.value = eval(screenvalue);
